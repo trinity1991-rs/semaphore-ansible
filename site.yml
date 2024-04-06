@@ -1,0 +1,7 @@
+---
+- hosts: my_servers
+  become: true
+  tasks:
+    - name: Print OS info
+      ansible.bultin.package:
+        name: apache2
