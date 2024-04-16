@@ -1,0 +1,45 @@
+---
+- hosts: "{{ backup_host }}"
+  gather_facts: false
+  tasks:
+
+  - name: Use vars from Vault
+    include_vars: unifi_info.yaml
+
+  - name: Get Cookie from Unifi
+    uri:
+      url: https://{{ url }}/api/login
+      method: POST
+      body_format: json
+      body: {"username":"{{ username }}","password":"{{ password }}"}
+      validate_certs: false
+    register: login
+
+  - name: Print returned data to ensure it worked
+    debug:
+      msg: "{{ login }}"
+
+  - name: Start backup and save path
+    uri:
+      url: https://{{ url }}/api/s/default/cmd/backup
+      method: POST
+      body_format: json
+      body: '{"cmd":"backup","days":"-1"}'
+      headers:
+        Cookie: "{{ login.cookies_string }}"
+      validate_certs: false
+    register: backupPath
+
+  - name: Print backup path
+    debug:
+      msg: "{{ backupPath.json.data[0].url }}"
+
+  - name: Download Backup
+    uri:
+     url: https://{{ url }}{{ backupPath.json.data[0].url }}
+     method: GET
+     validate_certs: false
+     headers:
+       Cookie: "{{ login.cookies_string }}"
+     dest: "{{ backup_dest }}/{{ lookup('pipe', 'date +%Y%m%d') }}_unifi_backup.unf"
+
