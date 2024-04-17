@@ -2,6 +2,6 @@
 - hosts: all
   become: true
   tasks:
-    - name: Print OS info
+    - name: Privileged task with SSH key
       ansible.builtin.package:
-        name: apache2
+        shell: apt-get install vim
