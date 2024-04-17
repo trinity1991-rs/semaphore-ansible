@@ -1,6 +1,5 @@
 ---
 - hosts: all
-  become: true
   tasks:
     - name: Privileged task with SSH key
       ansible.builtin.package:
