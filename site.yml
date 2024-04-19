@@ -1,6 +1,5 @@
 ---
 - hosts: all
-  ansible_user: 
   gather_facts: yes
   become: true
 
