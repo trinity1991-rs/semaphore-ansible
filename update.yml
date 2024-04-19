@@ -1,5 +1,7 @@
 ---
 - hosts: all
+  ansible_user: ssh_and_sudoer_account_username
+   become: true
   tasks:
     - name: Update apt repo and cache on all Debian/Ubuntu boxes
       apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
