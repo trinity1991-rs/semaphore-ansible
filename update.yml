@@ -1,6 +1,6 @@
 ---
 - hosts: all
-  ansible_user: ssh_and_sudoer_account_username
+  ansible_user: odin
    become: true
   tasks:
     - name: Update apt repo and cache on all Debian/Ubuntu boxes
