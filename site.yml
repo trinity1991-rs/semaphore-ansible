@@ -1,6 +1,6 @@
 ---
 - hosts: all
-  ansible_user: ssh_and_sudoer_account_username 
+  ansible_user: 
   gather_facts: yes
   become: true
 
