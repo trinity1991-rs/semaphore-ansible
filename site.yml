@@ -1,7 +1,8 @@
 ---
 - hosts: all
+  ansible_user: ssh_and_sudoer_account_username 
   gather_facts: yes
-  become: false
+  become: true
 
   tasks:
     - name: Perform a dist-upgrade.
