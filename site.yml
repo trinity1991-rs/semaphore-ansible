@@ -1,7 +1,8 @@
 - hosts: all
   become: yes
+  become_method: sudo
+  vars:
+    ansible_become_pass: "{{ vault_sudo_password }}"
   tasks:
-  - name: Install a package
-    apt:
-      name: vim
-      state: present
+  - name: Execute a privileged task
+    shell: echo "Performing a privileged task"
