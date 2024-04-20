@@ -1,6 +1,6 @@
 ---
 - name: Reach out to remote probes and troubleshoot routing
-  hosts: all
+  hosts: 12.0.0.255
   gather_facts: no
   vars:
     ansible_command_timeout: 120
