@@ -1,5 +1,5 @@
 ---
-- hosts: all
+- hosts: srv1@12.1.0.5
   become: true
   tasks:
     - name: Update apt repo and cache on all Debian/Ubuntu boxes
