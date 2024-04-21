@@ -1,8 +1,6 @@
+---
 - hosts: all
   become: yes
-  become_method: sudo
-  vars:
-    ansible_become_pass: "{{ vault_sudo_password }}"
   tasks:
-  - name: Execute a privileged task
-    shell: echo "Performing a privileged task"
+    - name: Shutdown the server
+      shell: shutdown -h now
