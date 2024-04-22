@@ -6,7 +6,8 @@
       apt:
         update_cache: yes
 
-    - name: Install Nano text editor
+    - name: Upgrade all packages
       apt:
-        name: nano
-        state: present
+        upgrade: dist
+        autoremove: yes
+        autoclean: yes
