@@ -1,5 +1,8 @@
-ping_test:
-  target_address: 8.8.8.8
-  count: 5
-  interval: 1s
-  timeout: 2s
+---
+- hosts: RTR-FALL
+  connection: network_cli
+  gather_facts: no 
+  tasks:
+  - name: Add IP Address Ether5
+    routeros_command:
+      commands: /ip address add address=192.168.100.1/24 interface=ether5
