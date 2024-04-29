@@ -1,7 +1,7 @@
 ---
 - name: Mikrotik RouterOS and Firmware Upgrades
   hosts: all
-  gather_facts: false
+  gather_facts: true
   tasks:
 
 # Update RouterOS version.  Mikrotik update/install command automatically reboots the router
