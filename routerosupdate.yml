@@ -1,16 +1,5 @@
----
-- name: Reach out to remote probes and troubleshoot routing
-  hosts: 12.0.0.255
-  gather_facts: no
-  vars:
-    ansible_command_timeout: 120
-    destIP: 8.8.8.8
-    srcIP: 0.0.0.0
-  tasks:
-
-
-    - name: Ping Destination
-      routeros_command:
-        commands:
-          - "/ping count=10 {{ destIP }}"
-      register: pings
+ping_test:
+  target_address: 8.8.8.8
+  count: 5
+  interval: 1s
+  timeout: 2s
