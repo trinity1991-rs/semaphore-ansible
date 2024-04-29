@@ -1,13 +1,18 @@
 ---
-- hosts: all
-  become: yes
+- name: Mikrotik RouterOS and Firmware Upgrades
+  hosts: all
+  gather_facts: false
   tasks:
-    - name: Update apt package cache
-      apt:
-        update_cache: yes
 
-    - name: Upgrade all packages
-      apt:
-        upgrade: dist
-        autoremove: yes
-        autoclean: yes
+# Update RouterOS version.  Mikrotik update/install command automatically reboots the router
+  - name: Check for RouterOS updates
+    community.routeros.command:
+      commands:
+        - /system package update check-for-updates
+    register: system_update_print
+
+  - name: Update RouterOS version
+    community.routeros.command:
+      commands:
+        - /system package update install
+    when: system_update_print is not search('System is already up to date')
