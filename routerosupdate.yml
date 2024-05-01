@@ -1,7 +1,5 @@
-dirección IP a una interfaz.
-
 ---
-- hosts: mikrotik
+- hosts: all
 
   tasks:
 
