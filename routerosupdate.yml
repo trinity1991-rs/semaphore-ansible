@@ -1,6 +1,5 @@
 ---
-- name: Ping MikroTik Device
-  hosts: mikrotik_devices
+- hosts: mikrotik_devices
   gather_facts: no
   connection: network_cli
   tasks:
