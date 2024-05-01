@@ -1,9 +1,13 @@
-- hosts: mikrotik
+---
+- name: Ping MikroTik Device
+  hosts: mikrotik_devices
   gather_facts: no
+  connection: network_cli
   tasks:
-  - name: Display resource statistics (routeros)
-    raw:
-      commands: /system routerboard print
-#      wait_for: result[0] contains MikroTik
-#    register: routeros_resources
+    - name: Ping MikroTik Router
+      mikrotik_command:
+        commands: "/ping count=5 address={{ 8.8.8.8 }}"
+      register: ping_result
 
+    - debug:
+        var: ping_result
