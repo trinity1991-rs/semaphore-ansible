@@ -1,8 +1,9 @@
----
-- hosts: all
-  connection: network_cli
-  gather_facts: no 
+- hosts: mikrotik
+  gather_facts: no
   tasks:
-  - name: Add IP Address Ether5
-    routeros_command:
-      commands: /ip address add address=192.168.100.1/24 interface=ether5
+  - name: Display resource statistics (routeros)
+    raw:
+      commands: /system routerboard print
+#      wait_for: result[0] contains MikroTik
+#    register: routeros_resources
+
