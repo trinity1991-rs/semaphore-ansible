@@ -1,12 +1,25 @@
----
 - hosts: all
   connection: network_cli
-  vars:
-    name: user1
-    passwd: 12345678
-    comment: User_Satu
-  gather_facts: no 
+  gather_facts: no
+  strategy: free
+  vars_files:
+   - vars.yml
+
+
+  roles:
+    - ntp-roles
+    - disable-service
+    - create-lan-bridge
+    - system-note
+    - set-lan-gw-ip
+    - set-dns
+    - create-int-list
+    - set-nat
+
   tasks:
-  - name: Add User Profile
-    routeros_command:
-      commands: "/ip hotspot user profile add address-list={{ name }} idle-timeout=4h incoming-filter={{ name }}-in incoming-packet-mark=packet-{{ name }}-in name={{ name }} outgoing-packet-mark=packet-{{ name }}-out shared-users=3"
+   
+ ## - name: securing admin user
+ ##   routeros_command:
+ ##     commands:
+ ##       - /user set address={{ local_net }} comment="system default user" group=full name=admin numbers=0
+ ##       - /user set password={{ admin_passwd }} name=admin numbers=0
