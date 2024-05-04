@@ -1,5 +1,5 @@
 ---
-- hosts: rb1
+- hosts: all
   connection: network_cli
   vars:
     name: user1
