@@ -1,16 +1,12 @@
-- hosts: all
+---
+- hosts: rb1
   connection: network_cli
-  gather_facts: true
   vars:
-    ansible_network_os: routeros
+    name: user1
+    passwd: 12345678
+    comment: User_Satu
+  gather_facts: no 
   tasks:
-    - name: Print RouterBoard version
-      routeros_command:
-        commands:
-          - /system routerboard print
-      register: result
-
-    - name: Display command output
-      debug: 
-        var: result.stdout_lines
-
+  - name: Add User Profile
+    routeros_command:
+      commands: "/ip hotspot user profile add address-list={{ name }} idle-timeout=4h incoming-filter={{ name }}-in incoming-packet-mark=packet-{{ name }}-in name={{ name }} outgoing-packet-mark=packet-{{ name }}-out shared-users=3"
