@@ -1,9 +1,16 @@
----
 - hosts: all
-
+  connection: network_cli
+  gather_facts: true
+  vars:
+    ansible_network_os: routeros
   tasks:
-
-    - name: Añadir IP
+    - name: Print RouterBoard version
       routeros_command:
-       commands:
-       - ip/address/add address=10.10.1.2/24 interface=ether2
+        commands:
+          - /system routerboard print
+      register: result
+
+    - name: Display command output
+      debug: 
+        var: result.stdout_lines
+
