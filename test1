@@ -1,5 +1,5 @@
 ---
-- hosts: srv2@12.1.0.6
+- hosts: all
   become: true
   tasks:
     - name: Print OS info
